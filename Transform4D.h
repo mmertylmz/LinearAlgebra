@@ -4,10 +4,10 @@
 struct Transform4D : Matrix4D 
 {
 	Transform4D();
-	Transform4D(float n00, float n01, float n02, float n03,
+	Transform4D(
+		float n00, float n01, float n02, float n03,
 		float n10, float n11, float n12, float n13,
-		float n20, float n21, float n22, float n23,
-		float n30, float n31, float n32, float n33);
+		float n20, float n21, float n22, float n23);
 
 	Transform4D(const Vector3D& a, const Vector3D& b, const Vector3D& c, const Point3D& p);
 
@@ -15,10 +15,10 @@ struct Transform4D : Matrix4D
 	const Vector3D& operator [](int j) const;
 
 	const Point3D& GetTranslation(void) const;
-	const Point3D& SetTranslation(const Point3D& p);
+	void SetTranslation(const Point3D& p);
 };
 
-Transform4D Inverse(const Transform4D& t);
+Transform4D Inverse(const Transform4D& H);
 
 Transform4D operator *(const Transform4D& A, const Transform4D& B);
 Vector3D operator *(const Transform4D& A, const Vector3D& V);

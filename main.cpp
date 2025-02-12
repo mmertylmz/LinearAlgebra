@@ -1,5 +1,5 @@
 #include "Matrix3D.h"
-#include "Matrix4D.h"
+#include "Transform4D.h"
 #define M_PI   3.14159265358979323846264338327950288
 
 int main()
@@ -78,7 +78,18 @@ int main()
 	std::cout << "Determinant of skewMatrix: " << Determinant(skewMatrix) << std::endl;*/
 
 	/*Vector4D v(1.0f, 2.0f, 3.0f, 4.0f);
-	PrintVector4D(v);*/	
+	PrintVector4D(v);*/
+
+	Transform4D T(
+		1.0f, 2.0f, 3.0f, 4.0f,
+		5.0f, 6.0f, 7.0f, 8.0f,
+		9.0f, 10.0f, 11.0f, 12.0f
+	);
+
+	Transform4D T_inv = Inverse(T);
+	Transform4D T_identity = T * T_inv;
+
+	std::cout << "Determinant: " << Determinant(T_identity) << std::endl;
 
     return 0;
 }

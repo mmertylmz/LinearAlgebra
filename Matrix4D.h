@@ -2,7 +2,7 @@
 
 struct Matrix4D
 {
-private:
+protected:
     float n[4][4];
 public:
     Matrix4D();
