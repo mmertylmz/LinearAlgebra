@@ -11,7 +11,7 @@ struct Quaternion
 	const Vector3D& GetVectorPart(void) const;
 
 	Matrix3D GetRotationMatrix(void);
-	//void SetRotationMatrix(const Matrix3D& m);
+	void SetRotationMatrix(const Matrix3D& m);
 
 };
 
