@@ -68,3 +68,33 @@ Vector4D operator-(const Vector4D& a, const Vector4D& b)
 {
     return Vector4D(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
 }
+
+float Magnitude(const Vector4D& v)
+{
+    return std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+}
+
+Vector4D Normalize(const Vector4D& v)
+{
+    return v / Magnitude(v);
+}
+
+float Dot(const Vector4D& a, const Vector4D& b)
+{
+    return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+}
+
+Vector4D Project(const Vector4D& a, const Vector4D& b)
+{
+    return b * (Dot(a, b) / Dot(b, b));
+}
+
+Vector4D Reject(const Vector4D& a, const Vector4D& b)
+{
+    return a - Project(a, b);
+}
+
+void PrintVector4D(const Vector4D& v)
+{
+    std::cout << "Vector4D(" << v.x << ", " << v.y << ", " << v.z << ", " << v.w << ")\n";
+}

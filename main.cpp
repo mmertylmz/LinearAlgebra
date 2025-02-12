@@ -1,4 +1,5 @@
 #include "Matrix3D.h"
+#include "Vector4D.h"
 #define M_PI   3.14159265358979323846264338327950288
 
 int main()
@@ -75,6 +76,9 @@ int main()
 	float t = M_PI / 4.0f;
 	Matrix3D skewMatrix = MakeSkew(t, skewAxis, skewAxis2);
 	std::cout << "Determinant of skewMatrix: " << Determinant(skewMatrix) << std::endl;*/
+
+	Vector4D v(1.0f, 2.0f, 3.0f, 4.0f);
+	PrintVector4D(v);
 
     return 0;
 }
