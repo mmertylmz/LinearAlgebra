@@ -6,9 +6,9 @@ Matrix3D::Matrix3D(float n00, float n01, float n02,
 	float n10, float n11, float n12,
 	float n20, float n21, float n22)
 {
-	n[0][0] = n00; n[0][1] = n01; n[0][2] = n02;
-	n[1][0] = n10; n[1][1] = n11; n[1][2] = n12;
-	n[2][0] = n20; n[2][1] = n21; n[2][2] = n22;
+	n[0][0] = n00; n[0][1] = n10; n[0][2] = n20;
+	n[1][0] = n01; n[1][1] = n11; n[1][2] = n21;
+	n[2][0] = n02; n[2][1] = n12; n[2][2] = n22;
 }
 
 Matrix3D::Matrix3D(const Vector3D& a, const Vector3D& b, const Vector3D& c) 
@@ -106,7 +106,7 @@ Matrix3D Inverse(const Matrix3D& M)
 	Vector3D r1 = Cross(c, a);
 	Vector3D r2 = Cross(a, b);
 
-	if(Dot(r2,c) == 0.0f)
+	if (Dot(r2, c) == 0.0f)  //Determinant is zero (Dot(r2,c) means Determinant)
 	{
 		throw std::runtime_error("Matrix is singular and cannot be inverted.");
 	}
