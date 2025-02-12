@@ -87,6 +87,17 @@ Vector3D Cross(const Vector3D& a, const Vector3D& b)
 		a.x * b.y - a.y * b.x);
 }
 
+Vector3D Project(const Vector3D& a, const Vector3D& b)
+{
+    return b * Dot(a, b) / Dot(b, b);
+}
+
+Vector3D Reject(const Vector3D& a, const Vector3D& b)
+{
+	return a - Project(a, b);
+}
+
+
 void PrintVector3D(const Vector3D& v)
 {
     std::cout << "Vector3D(" << v.x << ", " << v.y << ", " << v.z << ")\n";

@@ -30,4 +30,7 @@ Vector3D Normalize(const Vector3D& v);
 float Dot(const Vector3D& a, const Vector3D& b);
 Vector3D Cross(const Vector3D& a, const Vector3D& b);
 
+Vector3D Project(const Vector3D& a, const Vector3D& b);
+Vector3D Reject(const Vector3D& a, const Vector3D& b);
+
 void PrintVector3D(const Vector3D& v);
