@@ -120,6 +120,41 @@ Matrix3D Inverse(const Matrix3D& M)
 	);
 }
 
+Matrix3D MakeRotationX(float t)
+{
+	float c = cos(t);
+	float s = sin(t);
+
+	return Matrix3D(
+		1.0F, 0.0F, 0.0F,
+		0.0F, c, -s,
+		0.0F, s , c
+	);
+}
+
+Matrix3D MakeRotationY(float t)
+{
+	float c = cos(t);
+	float s = sin(t);
+
+	return Matrix3D(
+		c, 0.0F, s,
+		0.0F, 1.0F, 0.0F,
+		s, 0.0F, c
+	);
+}
+
+Matrix3D MakeRotationZ(float t) 
+{
+	float c = cos(t);
+	float s = sin(t);
+
+	return Matrix3D(
+		c, -s, 0.0F,
+		s, c, 0.0F,
+		0.0F, 0.0F, 1.0F
+	);
+}
 
 //Print the matrix in row major order
 void PrintMatrix3D(const Matrix3D& m, const std::string& title)
