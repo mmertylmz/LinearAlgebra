@@ -75,6 +75,18 @@ Vector3D Normalize(const Vector3D& v)
     return v / Magnitude(v);
 }
 
+float Dot(const Vector3D& a, const Vector3D& b)
+{
+    return a.x * b.x + a.y * b.y + a.z * b.z;
+}
+
+Vector3D Cross(const Vector3D& a, const Vector3D& b)
+{
+	return Vector3D(a.y * b.z - a.z * b.y,
+		a.z * b.x - a.x * b.z,
+		a.x * b.y - a.y * b.x);
+}
+
 void PrintVector3D(const Vector3D& v)
 {
     std::cout << "Vector3D(" << v.x << ", " << v.y << ", " << v.z << ")\n";

@@ -27,4 +27,7 @@ Vector3D operator /(const Vector3D& v, float s);
 float Magnitude(const Vector3D& v);
 Vector3D Normalize(const Vector3D& v);
 
+float Dot(const Vector3D& a, const Vector3D& b);
+Vector3D Cross(const Vector3D& a, const Vector3D& b);
+
 void PrintVector3D(const Vector3D& v);
