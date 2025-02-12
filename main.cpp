@@ -24,6 +24,10 @@ int main()
 	m1(1, 0) = 10.0f;
 	PrintMatrix3D(m1, "Matrix m1");
 
+	m1[1].x = 20.0f;
+	PrintMatrix3D(m1, "Matrix m1");
+
+
 	/*
 	Vector3D a(1.0f, 2.0f, 3.0f);
 	Vector3D b(4.0f, 5.0f, 6.0f);
