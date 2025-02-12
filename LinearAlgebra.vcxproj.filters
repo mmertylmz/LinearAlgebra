@@ -50,5 +50,8 @@
     <ClInclude Include="Matrix4D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Transform4D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
