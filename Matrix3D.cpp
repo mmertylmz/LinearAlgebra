@@ -211,6 +211,24 @@ Matrix3D MakeInvolution(const Vector3D& a)
 	);
 }
 
+Matrix3D MakeScale(float s, const Vector3D& a)
+{
+	s -= 1.0F;
+	float x = a.x * s;
+	float y = a.y * s;
+	float z = a.z * s;
+
+	float axay = x * a.y;
+	float axaz = x * a.z;
+	float ayaz = y * a.z;
+
+	return Matrix3D(
+		x * a.x + 1.0F, axay, axaz,
+		axay, y * a.y + 1.0F, ayaz,
+		axaz, ayaz, z * a.z + 1.0F
+	);
+}
+
 //Print the matrix in row major order
 void PrintMatrix3D(const Matrix3D& m, const std::string& title)
 {
