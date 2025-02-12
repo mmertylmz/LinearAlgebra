@@ -9,7 +9,27 @@ const Vector3D& Quaternion::GetVectorPart(void) const
 	return reinterpret_cast<const Vector3D&>(x);
 }
 
-//TODO: GetRotationMatrix, SetRotationMatrix
+Matrix3D Quaternion::GetRotationMatrix(void)
+{
+	float x2 = x * x;
+	float y2 = y * y;
+	float z2 = z * z;
+	float xy = x * y;
+	float xz = x * z;
+	float yz = y * z;
+	float wx = w * x;
+	float wy = w * y;
+	float wz = w * z;
+
+	return Matrix3D(
+		1.0F - 2.0F * (y2 + z2), 2.0F * (xy - wz), 2.0F * (xz + wy),
+		2.0F * (xy + wz), 1.0F - 2.0F * (x2 + z2), 2.0F * (yz - wx),
+		2.0F * (xz - wy), 2.0F * (yz + wx), 1.0F - 2.0F * (x2 + y2)
+	);	
+}
+
+
+//TODO: SetRotationMatrix
 
 Quaternion operator*(const Quaternion& q1, const Quaternion& q2)
 {
