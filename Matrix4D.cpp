@@ -84,7 +84,6 @@ Matrix4D operator*(const Matrix4D& A, const Matrix4D& B)
     );
 }
 
-
 Vector4D operator*(const Matrix4D& M, const Vector4D& v)
 {
     return Vector4D(
@@ -93,4 +92,136 @@ Vector4D operator*(const Matrix4D& M, const Vector4D& v)
         M(2, 0) * v.x + M(2, 1) * v.y + M(2, 2) * v.z + M(2, 3) * v.w,
         M(3, 0) * v.x + M(3, 1) * v.y + M(3, 2) * v.z + M(3, 3) * v.w
     );
+}
+
+float Determinant3x3(float a11, float a12, float a13,
+    float a21, float a22, float a23,
+    float a31, float a32, float a33)
+{
+    return a11 * (a22 * a33 - a23 * a32) -
+        a12 * (a21 * a33 - a23 * a31) +
+        a13 * (a21 * a32 - a22 * a31);
+}
+
+float Determinant(const Matrix4D& M)
+{
+    float det = M(0, 0) * Determinant3x3(M(1, 1), M(1, 2), M(1, 3),
+        M(2, 1), M(2, 2), M(2, 3),
+        M(3, 1), M(3, 2), M(3, 3)) -
+        M(0, 1) * Determinant3x3(M(1, 0), M(1, 2), M(1, 3),
+            M(2, 0), M(2, 2), M(2, 3),
+            M(3, 0), M(3, 2), M(3, 3)) +
+        M(0, 2) * Determinant3x3(M(1, 0), M(1, 1), M(1, 3),
+            M(2, 0), M(2, 1), M(2, 3),
+            M(3, 0), M(3, 1), M(3, 3)) -
+        M(0, 3) * Determinant3x3(M(1, 0), M(1, 1), M(1, 2),
+            M(2, 0), M(2, 1), M(2, 2),
+            M(3, 0), M(3, 1), M(3, 2));
+    return det;
+}
+
+Matrix4D Inverse(const Matrix4D& M)
+{
+    float det = Determinant(M);
+    if (std::abs(det) < 1e-6f) {
+        throw std::runtime_error("Matrix is not invertible");
+    }
+
+    Matrix4D result;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            float sign = ((i + j) % 2 == 0) ? 1.0f : -1.0f;
+
+            float minor[9];
+            int idx = 0;
+            for (int r = 0; r < 4; r++) {
+                for (int c = 0; c < 4; c++) {
+                    if (r != i && c != j) {
+                        minor[idx++] = M(r, c);
+                    }
+                }
+            }
+
+            result(j, i) = sign * Determinant3x3(minor[0], minor[1], minor[2],
+                minor[3], minor[4], minor[5],
+                minor[6], minor[7], minor[8]) / det;
+        }
+    }
+
+    return result;
+}
+
+Matrix4D MakeTranslation4D(const Vector4D& v)
+{
+    return Matrix4D(
+        1.0f, 0.0f, 0.0f, v.x,
+        0.0f, 1.0f, 0.0f, v.y,
+        0.0f, 0.0f, 1.0f, v.z,
+        0.0f, 0.0f, 0.0f, 1.0f
+    );
+}
+
+Matrix4D MakeScale4D(float s)
+{
+    return Matrix4D(
+        s, 0.0f, 0.0f, 0.0f,
+        0.0f, s, 0.0f, 0.0f,
+        0.0f, 0.0f, s, 0.0f,
+        0.0f, 0.0f, 0.0f, s
+    );
+}
+
+Matrix4D MakeScale4D(float sx, float sy, float sz, float sw)
+{
+    return Matrix4D(
+        sx, 0.0f, 0.0f, 0.0f,
+        0.0f, sy, 0.0f, 0.0f,
+        0.0f, 0.0f, sz, 0.0f,
+        0.0f, 0.0f, 0.0f, sw
+    );
+}
+
+Matrix4D MakeRotation4D(float t, int plane)
+{
+    float c = std::cos(t);
+    float s = std::sin(t);
+
+    Matrix4D result;
+
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            result(i, j) = (i == j) ? 1.0f : 0.0f;
+        }
+    }
+
+    switch (plane) {
+    case 0:
+        result(0, 0) = c; result(0, 1) = -s;
+        result(1, 0) = s; result(1, 1) = c;
+        break;
+    case 1:
+        result(0, 0) = c; result(0, 2) = -s;
+        result(2, 0) = s; result(2, 2) = c;
+        break;
+    case 2:
+        result(1, 1) = c; result(1, 2) = -s;
+        result(2, 1) = s; result(2, 2) = c;
+        break;
+    case 3:
+        result(0, 0) = c; result(0, 3) = -s;
+        result(3, 0) = s; result(3, 3) = c;
+        break;
+    case 4:
+        result(1, 1) = c; result(1, 3) = -s;
+        result(3, 1) = s; result(3, 3) = c;
+        break;
+    case 5:
+        result(2, 2) = c; result(2, 3) = -s;
+        result(3, 2) = s; result(3, 3) = c;
+        break;
+    default:
+        throw std::invalid_argument("Invalid rotation plane");
+    }
+
+    return result;
 }
