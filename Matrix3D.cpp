@@ -65,6 +65,13 @@ Vector3D operator *(const Matrix3D& M, const Vector3D& v)
 	);
 }
 
+float Determinant(const Matrix3D& M)
+{
+	return (M(0, 0) * (M(1, 1) * M(2, 2) - M(1, 2) * M(2, 1))
+		+ M(0, 1) * (M(1, 2) * M(2, 0) - M(1, 0) * M(2, 2))
+		+ M(0, 2) * (M(1, 0) * M(2, 1) - M(1, 1) * M(2, 0)));
+}
+
 //Print the matrix in row major order
 void PrintMatrix3D(const Matrix3D& m, const std::string& title)
 {

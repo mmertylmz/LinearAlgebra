@@ -24,4 +24,6 @@ public:
 Matrix3D operator *(const Matrix3D& A, const Matrix3D& B);
 Vector3D operator *(const Matrix3D& M, const Vector3D& v);
 
+float Determinant(const Matrix3D& M);
+
 void PrintMatrix3D(const Matrix3D& m, const std::string& title);
