@@ -27,6 +27,7 @@ Vector3D operator *(const Matrix3D& M, const Vector3D& v);
 float Determinant(const Matrix3D& M);
 
 Matrix3D Inverse(const Matrix3D& M);
+Matrix3D MakeRotation(float t, const Vector3D& a);
 
 
 void PrintMatrix3D(const Matrix3D& m, const std::string& title);
