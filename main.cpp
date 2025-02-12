@@ -68,5 +68,13 @@ int main()
 	//Matrix3D involutionMatrix = MakeInvolution(involutionAxis);
 	//std::cout << "Determinant of involutionMatrix: " << Determinant(involutionMatrix) << std::endl;
 
+
+	//Skew Matrix Control
+	/*Vector3D skewAxis(1.0f, 0.0f, 0.0f);
+	Vector3D skewAxis2(0.0f, 1.0f, 0.0f);
+	float t = M_PI / 4.0f;
+	Matrix3D skewMatrix = MakeSkew(t, skewAxis, skewAxis2);
+	std::cout << "Determinant of skewMatrix: " << Determinant(skewMatrix) << std::endl;*/
+
     return 0;
 }

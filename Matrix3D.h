@@ -31,6 +31,7 @@ Matrix3D MakeRotation(float t, const Vector3D& a);
 Matrix3D MakeReflection(const Vector3D& a);
 Matrix3D MakeInvolution(const Vector3D& a);
 Matrix3D MakeScale(float s, const Vector3D& a);
+Matrix3D MakeSkew(float t, const Vector3D& a, const Vector3D& b);
 
 
 void PrintMatrix3D(const Matrix3D& m, const std::string& title);
