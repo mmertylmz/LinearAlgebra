@@ -131,6 +131,7 @@
     <ClCompile Include="Matrix3D.cpp" />
     <ClCompile Include="Matrix4D.cpp" />
     <ClCompile Include="Point3D.cpp" />
+    <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Transform4D.cpp" />
     <ClCompile Include="Vector3D.cpp" />
     <ClCompile Include="Vector4D.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Matrix3D.h" />
     <ClInclude Include="Matrix4D.h" />
     <ClInclude Include="Point3D.h" />
+    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Transform4D.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="Vector4D.h" />
