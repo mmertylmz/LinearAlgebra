@@ -177,6 +177,23 @@ Matrix3D MakeRotation(float t, const Vector3D& a)
 	);
 }
 
+Matrix3D MakeReflection(const Vector3D& a)
+{
+	float x = a.x * -2.0F;
+	float y = a.y * -2.0F;
+	float z = a.z * -2.0F;
+
+	float axay = x * a.y;
+	float axaz = x * a.z;
+	float ayaz = y * a.z;
+
+	return Matrix3D(
+		x * a.x + 1.0F, axay, axaz,
+		axay, y * a.y + 1.0F, ayaz,
+		axaz, ayaz, z * a.z + 1.0F
+	);
+}
+
 //Print the matrix in row major order
 void PrintMatrix3D(const Matrix3D& m, const std::string& title)
 {

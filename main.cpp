@@ -47,9 +47,7 @@ int main()
 	PrintMatrix3D(InversedMatrix, "Inversed Matrix m1");
 	PrintMatrix3D(m1 * InversedMatrix, "m1 * Inversed Matrix m1");*/
 	
-
-
-	Vector3D rotationAxis(1.0f, 0.0f, 0.0f); 
+	/*Vector3D rotationAxis(1.0f, 0.0f, 0.0f); 
 	float angle = M_PI / 4.0f;
 	Matrix3D rotationMatrix = MakeRotation(angle, rotationAxis);
 	PrintMatrix3D(rotationMatrix, "Rotation Matrix (45° around X-axis)");
@@ -57,7 +55,13 @@ int main()
 	float angle_90 = M_PI / 2.0f;      
 
 	Matrix3D rotationMatrix2 = MakeRotation(angle_90, rotationAxis);
-	PrintMatrix3D(rotationMatrix2, "Rotation Matrix (90° around X-axis)");
+	PrintMatrix3D(rotationMatrix2, "Rotation Matrix (90° around X-axis)");*/
+
+
+	//Reflection Matrix Control (Determinant always -1)
+	Vector3D reflectionAxis(1.0f, 0.0f, 0.0f);
+	Matrix3D reflectionMatrix = MakeReflection(reflectionAxis);
+	std::cout << "Determinant of reflectionMatrix: " << Determinant(reflectionMatrix) << std::endl;
 
     return 0;
 }
