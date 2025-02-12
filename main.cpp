@@ -80,10 +80,22 @@ int main()
 	/*Vector4D v(1.0f, 2.0f, 3.0f, 4.0f);
 	PrintVector4D(v);*/
 
+	Matrix4D M(
+		1.0f, 6.0f, 9.0f, 4.0f,
+		7.0f, 10.0f, 11.0f, 12.0f,
+		13.0f, 15.0f, 14.0f, 16.0f,
+		5.0f, 2.0f, 3.0f, 8.0f
+	);
+
+	Matrix4D M_inv = Inverse(M);
+	Matrix4D M_identity = M * M_inv;
+	std::cout << "Determinant: " << Determinant(M_identity) << std::endl;
+
+
 	Transform4D T(
-		1.0f, 2.0f, 3.0f, 4.0f,
-		5.0f, 6.0f, 7.0f, 8.0f,
-		9.0f, 10.0f, 11.0f, 12.0f
+		6.0f, 7.0f, 5.0f, 8.0f,
+		11.0f, 12.0f, 9.0f, 10.0f,
+		1.0f, 3.0f, 4.0f, 2.0f
 	);
 
 	Transform4D T_inv = Inverse(T);

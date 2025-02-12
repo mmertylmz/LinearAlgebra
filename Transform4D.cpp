@@ -58,6 +58,10 @@ Transform4D Inverse(const Transform4D& H)
 	Vector3D s = Cross(a, b);
 	Vector3D t = Cross(c, d);
 
+	if (std::abs(Dot(s, c)) < 1e-6f) {
+		throw std::runtime_error("Matrix is not invertible");
+	}
+
 	float invDet = 1.0F / Dot(s, c);
 
 	s *= invDet;
