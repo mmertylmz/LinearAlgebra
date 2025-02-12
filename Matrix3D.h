@@ -29,6 +29,7 @@ float Determinant(const Matrix3D& M);
 Matrix3D Inverse(const Matrix3D& M);
 Matrix3D MakeRotation(float t, const Vector3D& a);
 Matrix3D MakeReflection(const Vector3D& a);
+Matrix3D MakeInvolution(const Vector3D& a);
 
 
 void PrintMatrix3D(const Matrix3D& m, const std::string& title);

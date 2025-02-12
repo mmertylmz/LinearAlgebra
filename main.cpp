@@ -58,10 +58,15 @@ int main()
 	PrintMatrix3D(rotationMatrix2, "Rotation Matrix (90° around X-axis)");*/
 
 
-	//Reflection Matrix Control (Determinant always -1)
-	Vector3D reflectionAxis(1.0f, 0.0f, 0.0f);
-	Matrix3D reflectionMatrix = MakeReflection(reflectionAxis);
-	std::cout << "Determinant of reflectionMatrix: " << Determinant(reflectionMatrix) << std::endl;
+	////Reflection Matrix Control (Determinant always -1)
+	//Vector3D reflectionAxis(1.0f, 0.0f, 0.0f);
+	//Matrix3D reflectionMatrix = MakeReflection(reflectionAxis);
+	//std::cout << "Determinant of reflectionMatrix: " << Determinant(reflectionMatrix) << std::endl;
+
+	////Involution Matrix Control (Determinant always 1)
+	//Vector3D involutionAxis(1.0f, 0.0f, 0.0f);
+	//Matrix3D involutionMatrix = MakeInvolution(involutionAxis);
+	//std::cout << "Determinant of involutionMatrix: " << Determinant(involutionMatrix) << std::endl;
 
     return 0;
 }
