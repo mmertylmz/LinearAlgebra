@@ -110,3 +110,11 @@ Point3D operator *(const Transform4D& H, const Point3D& p)
 		H(2, 0) * p.x + H(2, 1) * p.y + H(2, 2) * p.z + H(2, 3));
 }
 
+Vector3D operator *(const Vector3D& n, const Transform4D& H)
+{
+	return Vector3D(
+		n.x * H(0, 0) + n.y * H(1, 0) + n.z * H(2, 0),
+		n.x * H(0, 1) + n.y * H(1, 1) + n.z * H(2, 1),
+		n.x * H(0, 2) + n.y * H(1, 2) + n.z * H(2, 2));
+}
+

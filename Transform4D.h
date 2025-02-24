@@ -23,3 +23,4 @@ Transform4D Inverse(const Transform4D& H);
 Transform4D operator *(const Transform4D& A, const Transform4D& B);
 Vector3D operator *(const Transform4D& A, const Vector3D& V);
 Point3D operator *(const Transform4D& A, const Point3D& P);
+Vector3D operator *(const Vector3D& n, const Transform4D& H);
