@@ -26,12 +26,14 @@ Vector3D operator *(const Matrix3D& M, const Vector3D& v);
 
 float Determinant(const Matrix3D& M);
 
+Matrix3D Transpose(const Matrix3D& m);
 Matrix3D Inverse(const Matrix3D& M);
 Matrix3D MakeRotation(float t, const Vector3D& a);
 Matrix3D MakeReflection(const Vector3D& a);
 Matrix3D MakeInvolution(const Vector3D& a);
 Matrix3D MakeScale(float s, const Vector3D& a);
 Matrix3D MakeSkew(float t, const Vector3D& a, const Vector3D& b);
+
 
 
 void PrintMatrix3D(const Matrix3D& m, const std::string& title);

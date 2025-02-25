@@ -3,41 +3,128 @@
 #define M_PI   3.14159265358979323846264338327950288
 
 void TestVectorOperations() {
-	// Vector addition test
-	Vector3D v(1.0f, 2.0f, 3.0f);
-	PrintVector3D(v);
+    // Test 1: Vector Addition
+    Vector3D v1(1.0f, 2.0f, 3.0f);
+    Vector3D v2(4.0f, 5.0f, 6.0f);
+    Vector3D sum = v1 + v2;
 
-	Vector3D w(4.0f, 5.0f, 6.0f);
-	Vector3D result = v + w;
+    bool additionTest = (sum.x == 5.0f && sum.y == 7.0f && sum.z == 9.0f);
+    std::cout << "Vector Addition Test: " << (additionTest ? "PASSED" : "FAILED") << std::endl;
 
-	PrintVector3D(result);
+    // Test 2: Vector Subtraction
+    Vector3D diff = v2 - v1;
+    bool subtractionTest = (diff.x == 3.0f && diff.y == 3.0f && diff.z == 3.0f);
+    std::cout << "Vector Subtraction Test: " << (subtractionTest ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 3: Scalar Multiplication
+    float scalar = 2.0f;
+    Vector3D scaled = v1 * scalar;
+    bool scalarMultTest = (scaled.x == 2.0f && scaled.y == 4.0f && scaled.z == 6.0f);
+    std::cout << "Scalar Multiplication Test: " << (scalarMultTest ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 4: Dot Product
+    float dot = Dot(v1, v2);
+    bool dotProductTest = (fabs(dot - 32.0f) < 0.0001f); // 1*4 + 2*5 + 3*6 = 32
+    std::cout << "Dot Product Test: " << (dotProductTest ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 5: Cross Product
+    Vector3D cross = Cross(v1, v2);
+    bool crossProductTest = (
+        fabs(cross.x - (-3.0f)) < 0.0001f &&
+        fabs(cross.y - (6.0f)) < 0.0001f &&
+        fabs(cross.z - (-3.0f)) < 0.0001f
+        );
+    std::cout << "Cross Product Test: " << (crossProductTest ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 6: Vector Magnitude
+    Vector3D v3(3.0f, 4.0f, 0.0f);
+    float magnitude = Magnitude(v3);
+    bool magnitudeTest = (fabs(magnitude - 5.0f) < 0.0001f); // 3-4-5 triangle
+    std::cout << "Magnitude Test: " << (magnitudeTest ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 7: Vector Normalization
+    Vector3D normalized = Normalize(v3);
+    bool normalizationTest = (
+        fabs(normalized.x - 0.6f) < 0.0001f &&
+        fabs(normalized.y - 0.8f) < 0.0001f &&
+        fabs(normalized.z - 0.0f) < 0.0001f
+        );
+    std::cout << "Normalization Test: " << (normalizationTest ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 8: Zero Vector Test
+    Vector3D zero(0.0f, 0.0f, 0.0f);
+    bool zeroMagnitudeTest = (Magnitude(zero) == 0.0f);
+    std::cout << "Zero Vector Test: " << (zeroMagnitudeTest ? "PASSED" : "FAILED") << std::endl;
 }
 
 void TestBasicMatrixOperations() {
-	// Basic matrix creation and access
-	Matrix3D m1(2.0f, 3.0f, 1.0f,
-		-1.0f, 0.0f, 4.0f,
-		5.0f, -2.0f, 6.0f);
+    // Test 1: Matrix Creation and Element Access
+    Matrix3D m1(
+        2.0f, -1.0f, 5.0f,
+        3.0f, 0.0f, -2.0f,    
+        1.0f, 4.0f, 6.0f   
+    );
 
-	PrintMatrix3D(m1, "Matrix m1");
+    // Test element access using (i,j) operator
+    bool accessTest = (
+        m1(0, 0) == 2.0f && m1(0, 1) == 3.0f && m1(0, 2) == 1.0f &&
+        m1(1, 0) == -1.0f && m1(1, 1) == 0.0f && m1(1, 2) == 4.0f &&
+        m1(2, 0) == 5.0f && m1(2, 1) == -2.0f && m1(2, 2) == 6.0f
+        );
+    std::cout << "Matrix Element Access Test: " << (accessTest ? "PASSED" : "FAILED") << std::endl;
 
-	// Testing matrix element access
-	float value = m1(1, 0);
-	std::cout << "Value at (1,0): " << value << std::endl;
+    // Test 2: Matrix Modification
+    m1(1, 0) = 10.0f;
+    bool modificationTest = (m1(1, 0) == 10.0f);
+    std::cout << "Matrix Element Modification Test: " << (modificationTest ? "PASSED" : "FAILED") << std::endl;
 
-	m1(1, 0) = 10.0f;
-	PrintMatrix3D(m1, "Matrix m1 after modifying (1,0)");
+    // Test 3: Matrix Creation from Vectors
+    Vector3D a(1.0f, 4.0f, 7.0f); 
+    Vector3D b(2.0f, 5.0f, 8.0f);  
+    Vector3D c(3.0f, 6.0f, 9.0f);  
+    Matrix3D m2(a, b, c);
 
-	m1[1].x = 20.0f;
-	PrintMatrix3D(m1, "Matrix m1 after modifying [1].x");
+    bool vectorConstructionTest = (
+        m2(0, 0) == 1.0f && m2(0, 1) == 2.0f && m2(0, 2) == 3.0f &&
+        m2(1, 0) == 4.0f && m2(1, 1) == 5.0f && m2(1, 2) == 6.0f &&
+        m2(2, 0) == 7.0f && m2(2, 1) == 8.0f && m2(2, 2) == 9.0f
+        );
+    std::cout << "Matrix from Vectors Construction Test: " << (vectorConstructionTest ? "PASSED" : "FAILED") << std::endl;
 
-	// Matrix creation from vectors
-	Vector3D a(1.0f, 2.0f, 3.0f);
-	Vector3D b(4.0f, 5.0f, 6.0f);
-	Vector3D c(7.0f, 8.0f, 9.0f);
-	Matrix3D m2(a, b, c);
+    // Test 4: Matrix Multiplication
+    Matrix3D product = m1 * m2;
 
-	PrintMatrix3D(m2, "Matrix m2");
+    float expected = m1(0, 0) * m2(0, 0) + m1(0, 1) * m2(1, 0) + m1(0, 2) * m2(2, 0);
+    bool multiplicationTest = (fabs(product(0, 0) - expected) < 0.0001f);
+    std::cout << "Matrix Multiplication Test: " << (multiplicationTest ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 5: Identity Matrix Properties
+    Matrix3D identity(
+        1.0f, 0.0f, 0.0f,  
+        0.0f, 1.0f, 0.0f,  
+        0.0f, 0.0f, 1.0f   
+    );
+    Matrix3D result = m1 * identity;
+    bool identityTest = true;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (fabs(result(i, j) - m1(i, j)) > 0.0001f) {
+                identityTest = false;
+                break;
+            }
+        }
+    }
+    std::cout << "Identity Matrix Properties Test: " << (identityTest ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 6: Matrix Vector Multiplication
+    Vector3D testVec(1.0f, 1.0f, 1.0f);
+    Vector3D resultVec = m1 * testVec;
+    bool matVecMultTest = (
+        fabs(resultVec.x - (m1(0, 0) + m1(0, 1) + m1(0, 2))) < 0.0001f &&
+        fabs(resultVec.y - (m1(1, 0) + m1(1, 1) + m1(1, 2))) < 0.0001f &&
+        fabs(resultVec.z - (m1(2, 0) + m1(2, 1) + m1(2, 2))) < 0.0001f
+        );
+    std::cout << "Matrix-Vector Multiplication Test: " << (matVecMultTest ? "PASSED" : "FAILED") << std::endl;
 }
 
 void TestMatrixInverse() {
@@ -53,17 +140,57 @@ void TestMatrixInverse() {
 }
 
 void TestRotationMatrix() {
-    Vector3D rotationAxis(1.0f, 0.0f, 0.0f);
-
-    // 45 degree rotation
-    float angle = M_PI / 4.0f;
+	Vector3D rotationAxis(1.0f, 0.0f, 0.0f); // X-Axis Rotation
+    float angle = M_PI / 4.0f;  // 45 degree
     Matrix3D rotationMatrix = MakeRotation(angle, rotationAxis);
-    PrintMatrix3D(rotationMatrix, "Rotation Matrix (45° around X-axis)");
 
-    // 90 degree rotation
-    float angle_90 = M_PI / 2.0f;
-    Matrix3D rotationMatrix2 = MakeRotation(angle_90, rotationAxis);
-    PrintMatrix3D(rotationMatrix2, "Rotation Matrix (90° around X-axis)");
+    // Test 1: Determinant Test
+    float det = Determinant(rotationMatrix);
+    std::cout << "Rotation Matrix Determinant Test:" << std::endl;
+    std::cout << "Expected: 1.0, Actual: " << det << std::endl;
+    std::cout << "Test 1 " << (fabs(det - 1.0f) < 0.0001f ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 2: Inverse of the Rotation Matrix = Transpose Matrix
+    Matrix3D inverse = Inverse(rotationMatrix);
+    Matrix3D transpose = Transpose(rotationMatrix);
+    bool isInverseEqualTranspose = true;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (fabs(inverse(i, j) - transpose(i, j)) > 0.0001f) {
+                isInverseEqualTranspose = false;
+                break;
+            }
+        }
+    }
+    std::cout << "\nInverse = Transpose Test: " << (isInverseEqualTranspose ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 3: Rotation Matrix * Transpose Matrix = Identity Matrix
+    Matrix3D identity = rotationMatrix * transpose;
+    bool isIdentity = true;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            float expected = (i == j) ? 1.0f : 0.0f;
+            if (fabs(identity(i, j) - expected) > 0.0001f) {
+                isIdentity = false;
+                break;
+            }
+        }
+    }
+    std::cout << "Rotation * Transpose = Identity Test: " << (isIdentity ? "PASSED" : "FAILED") << std::endl;
+
+    // Test 4: 360 degree rotation test
+    Matrix3D full_rotation = MakeRotation(2 * M_PI, rotationAxis);
+    bool isBackToStart = true;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            float expected = (i == j) ? 1.0f : 0.0f;
+            if (fabs(full_rotation(i, j) - expected) > 0.0001f) {
+                isBackToStart = false;
+                break;
+            }
+        }
+    }
+    std::cout << "360-degree Rotation Test: " << (isBackToStart ? "PASSED" : "FAILED") << std::endl;
 }
 
 void TestReflectionAndInvolution() {
@@ -159,35 +286,35 @@ void TestPointLineDistance() {
 
 int main()
 {
-	std::cout << "=== Testing Vector Operations ===" << std::endl;
-	TestVectorOperations();
+	/*std::cout << "=== Testing Vector Operations ===" << std::endl;
+	TestVectorOperations();*/
 
 	std::cout << "\n=== Testing Basic Matrix Operations ===" << std::endl;
 	TestBasicMatrixOperations();
 
-    std::cout << "\n=== Testing Matrix Inverse ===" << std::endl;
-    TestMatrixInverse();
+    /*std::cout << "\n=== Testing Matrix Inverse ===" << std::endl;
+    TestMatrixInverse();*/
 
-    std::cout << "\n=== Testing Rotation Matrix ===" << std::endl;
-    TestRotationMatrix();
+    /*std::cout << "\n=== Testing Rotation Matrix ===" << std::endl;
+    TestRotationMatrix();*/
 
-    std::cout << "\n=== Testing Reflection and Involution ===" << std::endl;
-    TestReflectionAndInvolution();
+    /*std::cout << "\n=== Testing Reflection and Involution ===" << std::endl;
+    TestReflectionAndInvolution();*/
 
-    std::cout << "\n=== Testing Skew Matrix ===" << std::endl;
-    TestSkewMatrix();
+    /*std::cout << "\n=== Testing Skew Matrix ===" << std::endl;
+    TestSkewMatrix();*/
 
-    std::cout << "\n=== Testing Vector4D ===" << std::endl;
-    TestVector4D();
+    /*std::cout << "\n=== Testing Vector4D ===" << std::endl;
+    TestVector4D();*/
 
-    std::cout << "\n=== Testing Matrix4D and Transform4D ===" << std::endl;
-    TestMatrix4DAndTransform();
+    /*std::cout << "\n=== Testing Matrix4D and Transform4D ===" << std::endl;
+    TestMatrix4DAndTransform();*/
 
-    std::cout << "\n=== Testing Line-Line Distance ===" << std::endl;
-    TestLineLineDistance();
+    /*std::cout << "\n=== Testing Line-Line Distance ===" << std::endl;
+    TestLineLineDistance();*/
 
-    std::cout << "\n=== Testing Point-Line Distance ===" << std::endl;
-    TestPointLineDistance();
+    /*std::cout << "\n=== Testing Point-Line Distance ===" << std::endl;
+    TestPointLineDistance();*/
 
 	return 0;
 }

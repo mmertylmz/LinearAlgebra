@@ -73,6 +73,15 @@ float Determinant(const Matrix3D& M)
 		+ M(0, 2) * (M(1, 0) * M(2, 1) - M(1, 1) * M(2, 0)));
 }
 
+Matrix3D Transpose(const Matrix3D& m) 
+{
+	return Matrix3D(
+		m(0, 0), m(1, 0), m(2, 0),
+		m(0, 1), m(1, 1), m(2, 1),
+		m(0, 2), m(1, 2), m(2, 2)
+	);
+}
+
 //Matrix3D Inverse(const Matrix3D& M)
 //{
 //	float det = Determinant(M);
