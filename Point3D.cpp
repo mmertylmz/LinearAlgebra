@@ -26,7 +26,7 @@ float DistLineLine(const Point3D& p1, const Vector3D& v1, const Point3D& p2, con
 
 	float det = v12 * v12 - v11 * v22;
 
-	if(fabs(det) > FLT_MIN)
+	if (fabs(det) > FLT_MIN) //The lines are not parallel (det != 0)
 	{
 		det = 1.0F / det;
 
@@ -38,7 +38,7 @@ float DistLineLine(const Point3D& p1, const Vector3D& v1, const Point3D& p2, con
 		return Magnitude(dp + v2 * t2 - v1 * t1);
 	}
 
-	//The lines are parallel
+	//The lines are parallel (det == 0)
 	Vector3D a = Cross(dp, v1);
-	return sqrt(Dot(a, a) / v11);
+	return sqrt(Dot(a, a) / v11); //Use the distance from a point to a line (Same as DistPointLine)
 }
