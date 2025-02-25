@@ -8,3 +8,5 @@ struct Point3D : Vector3D
 
 Point3D operator +(const Point3D& a, const Vector3D& b);
 Point3D operator -(const Point3D& a, const Vector3D& b);
+
+float DistPointLine(const Point3D& p, const Point3D& q, const Vector3D& v);
