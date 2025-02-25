@@ -10,3 +10,4 @@ Point3D operator +(const Point3D& a, const Vector3D& b);
 Point3D operator -(const Point3D& a, const Vector3D& b);
 
 float DistPointLine(const Point3D& p, const Point3D& q, const Vector3D& v);
+float DistLineLine(const Point3D& p, const Vector3D& u, const Point3D& q, const Vector3D& v);
