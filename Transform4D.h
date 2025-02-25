@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Matrix4D.h"
 #include "Point3D.h"
 

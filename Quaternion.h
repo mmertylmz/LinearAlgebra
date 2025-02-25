@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Matrix3D.h"
 
 struct Quaternion
