@@ -2,6 +2,7 @@
 
 #include "Matrix4D.h"
 #include "Point3D.h"
+#include "Plane.h"
 
 struct Transform4D : Matrix4D 
 {
@@ -26,3 +27,5 @@ Transform4D operator *(const Transform4D& A, const Transform4D& B);
 Vector3D operator *(const Transform4D& A, const Vector3D& V);
 Point3D operator *(const Transform4D& A, const Point3D& P);
 Vector3D operator *(const Vector3D& n, const Transform4D& H);
+
+Transform4D MakeReflection(const Plane& f);
