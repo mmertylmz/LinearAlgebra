@@ -130,6 +130,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix3D.cpp" />
     <ClCompile Include="Matrix4D.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Point3D.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Transform4D.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Matrix3D.h" />
     <ClInclude Include="Matrix4D.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="Point3D.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Transform4D.h" />
