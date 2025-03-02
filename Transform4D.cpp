@@ -117,22 +117,3 @@ Vector3D operator *(const Vector3D& n, const Transform4D& H)
 		n.x * H(0, 1) + n.y * H(1, 1) + n.z * H(2, 1),
 		n.x * H(0, 2) + n.y * H(1, 2) + n.z * H(2, 2));
 }
-
-
-Transform4D MakeReflection(const Plane& f)
-{
-
-	float x = f.x * -2.0F;
-	float y = f.y * -2.0F;
-	float z = f.z * -2.0F;
-	float nxny = x * f.y;
-	float nxnz = x * f.z;
-	float nynz = y * f.z;
-
-	return Transform4D(
-		x * f.x + 1.0F, nxny, nxnz, x * f.w,
-		nxny, y * f.y + 1.0F, nynz, y * f.w,
-		nxnz, nynz, z * f.z + 1.0F, z * f.w
-	);
-}
-

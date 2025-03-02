@@ -2,6 +2,7 @@
 
 #include "Point3D.h"
 #include "Vector3D.h"
+#include "Transform4D.h"
 
 struct Plane 
 {
@@ -15,3 +16,5 @@ struct Plane
 
 float Dot(const Plane& f, const Point3D& p);
 float Dot(const Plane& f, const Vector3D& v);
+
+Transform4D MakeReflection(const Plane& f);
