@@ -95,3 +95,25 @@ bool IntersectThreePlanes(const Plane& f1, const Plane& f2, const Plane& f3, Poi
 
 	return false;
 }
+
+
+bool IntersectTwoPlanes(const Plane& f1, const Plane& f2, Point3D *p, Vector3D *v)
+{
+	const Vector3D& n1 = f1.Normal();
+	const Vector3D& n2 = f2.Normal();
+
+	*v = Cross(n1, n2);
+	float det = Dot(*v, *v);
+
+	if(fabs(det) > FLT_MIN)
+	{
+		Vector3D result = (Cross(*v, n2) * f1.w + Cross(n1, *v) * f2.w) / det;
+
+		*p = Point3D(result.x, result.y, result.z);
+
+		return true;
+	}
+	
+	return false;
+
+}

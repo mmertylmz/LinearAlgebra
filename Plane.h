@@ -20,3 +20,4 @@ float Dot(const Plane& f, const Vector3D& v);
 Transform4D MakeReflection(const Plane& f);
 bool IntersectLinePlane(const Point3D& p, const Vector3D& v, const Plane& f, Point3D q);
 bool IntersectThreePlanes(const Plane& f1, const Plane& f2, const Plane& f3, Point3D& p);
+bool IntersectTwoPlanes(const Plane& f1, const Plane& f2, Point3D *p, Vector3D *v);
