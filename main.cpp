@@ -1,5 +1,6 @@
 ﻿#include "Matrix3D.h"
 #include "Transform4D.h"
+#include "Plane.h"
 #define M_PI   3.14159265358979323846264338327950288
 
 void TestVectorOperations() {
@@ -283,14 +284,85 @@ void TestPointLineDistance() {
     }
 }
 
+void TestIntersectTwoPlanes() {
+    std::cout << "\n--- Testing IntersectTwoPlanes ---\n";
+
+    Plane plane1(2.0f, 3.0f, -1.0f, 5.0f);
+
+    Plane plane2(1.0f, -1.0f, 2.0f, -1.0f);
+
+    std::cout << "Plane 1 normal: ";
+    PrintVector3D(plane1.Normal());
+
+    std::cout << "Plane 2 normal: ";
+    PrintVector3D(plane2.Normal());
+
+    Point3D intersectionPoint;
+    Vector3D intersectionDirection;
+
+    bool intersects = IntersectTwoPlanes(plane1, plane2, &intersectionPoint, &intersectionDirection);
+
+    if (intersects) {
+        std::cout << "Planes intersect in a line!\n";
+        std::cout << "Point on the intersection line: ";
+        PrintVector3D(intersectionPoint);
+
+        std::cout << "Direction of the intersection line: ";
+        PrintVector3D(intersectionDirection);
+
+        float dist1 = Dot(plane1, intersectionPoint);
+        float dist2 = Dot(plane2, intersectionPoint);
+
+        std::cout << "Distance from point to plane 1: " << dist1 << " (should be close to 0)\n";
+        std::cout << "Distance from point to plane 2: " << dist2 << " (should be close to 0)\n";
+
+        float dot1 = Dot(plane1.Normal(), intersectionDirection);
+        float dot2 = Dot(plane2.Normal(), intersectionDirection);
+
+        std::cout << "Dot product of plane 1 normal and intersection direction: " << dot1 << " (should be close to 0)\n";
+        std::cout << "Dot product of plane 2 normal and intersection direction: " << dot2 << " (should be close to 0)\n";
+    }
+    else {
+        std::cout << "Planes are parallel and do not intersect.\n";
+    }
+}
+
+void TestIntersectThreePlanes() {
+    std::cout << "\n--- Testing IntersectThreePlanes ---\n";
+
+    Plane plane1(2.0f, 3.0f, -1.0f, 5.0f);   // 2x + 3y - z + 5 = 0
+    Plane plane2(1.0f, -1.0f, 2.0f, -1.0f);  // x - y + 2z - 1 = 0
+    Plane plane3(3.0f, 1.0f, 1.0f, 2.0f);    // 3x + y + z + 2 = 0
+
+    Point3D intersectionPoint;
+
+    bool intersects = IntersectThreePlanes(plane1, plane2, plane3, intersectionPoint);
+
+    if (intersects) {
+        std::cout << "Planes intersect at a point!\n";
+        std::cout << "Intersection point: ";
+        PrintVector3D(intersectionPoint);
+
+        float dist1 = Dot(plane1, intersectionPoint);
+        float dist2 = Dot(plane2, intersectionPoint);
+        float dist3 = Dot(plane3, intersectionPoint);
+
+        std::cout << "Distance from point to plane 1: " << dist1 << " (should be close to 0)\n";
+        std::cout << "Distance from point to plane 2: " << dist2 << " (should be close to 0)\n";
+        std::cout << "Distance from point to plane 3: " << dist3 << " (should be close to 0)\n";
+    }
+    else {
+        std::cout << "Planes do not intersect at a single point.\n";
+    }
+}
 
 int main()
 {
 	/*std::cout << "=== Testing Vector Operations ===" << std::endl;
 	TestVectorOperations();*/
 
-	std::cout << "\n=== Testing Basic Matrix Operations ===" << std::endl;
-	TestBasicMatrixOperations();
+	/*std::cout << "\n=== Testing Basic Matrix Operations ===" << std::endl;
+	TestBasicMatrixOperations();*/
 
     /*std::cout << "\n=== Testing Matrix Inverse ===" << std::endl;
     TestMatrixInverse();*/
@@ -315,6 +387,9 @@ int main()
 
     /*std::cout << "\n=== Testing Point-Line Distance ===" << std::endl;
     TestPointLineDistance();*/
+
+    //TestIntersectTwoPlanes();
+    //TestIntersectThreePlanes();
 
 	return 0;
 }
