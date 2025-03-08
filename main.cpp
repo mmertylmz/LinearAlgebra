@@ -356,6 +356,47 @@ void TestIntersectThreePlanes() {
     }
 }
 
+void TestPlaneTransformation()
+{
+    std::cout << "\n--- Testing Plane Transformation ---\n";
+
+    // Create a test plane: 2x + 3y - z + 5 = 0
+    Plane testPlane(2.0f, 3.0f, -1.0f, 5.0f);
+    std::cout << "Original Plane: Normal=(" << testPlane.x << ", " << testPlane.y << ", "
+        << testPlane.z << "), d=" << testPlane.w << std::endl;
+
+    // Create a test point on the plane
+    Point3D pointOnPlane(1.0f, 0.0f, 7.0f);  // 2*1 + 3*0 - 7 + 5 = 0
+    std::cout << "Point on original plane: (" << pointOnPlane.x << ", "
+        << pointOnPlane.y << ", " << pointOnPlane.z << ")" << std::endl;
+    std::cout << "Distance from point to plane: " << Dot(testPlane, pointOnPlane) << " (should be 0)\n";
+
+    // Create a transformation matrix (translation + rotation)
+    Transform4D transform = Transform4D(
+        0.866f, -0.5f, 0.0f, 2.0f,  // cos(30°), -sin(30°), 0, x-translation
+        0.5f, 0.866f, 0.0f, -1.0f,  // sin(30°), cos(30°), 0, y-translation
+        0.0f, 0.0f, 1.0f, 3.0f      // 0, 0, 1, z-translation
+    );
+
+    // Calculate inverse of the transformation
+    Transform4D inverseTransform = Inverse(transform);
+
+    // Transform the plane using the inverse transformation
+    Plane transformedPlane = testPlane * inverseTransform;
+    std::cout << "Transformed Plane: Normal=(" << transformedPlane.x << ", " << transformedPlane.y << ", "
+        << transformedPlane.z << "), d=" << transformedPlane.w << std::endl;
+
+    // Transform the point (using the original transform, not the inverse)
+    Point3D transformedPoint = transform * pointOnPlane;
+    std::cout << "Transformed point: (" << transformedPoint.x << ", "
+        << transformedPoint.y << ", " << transformedPoint.z << ")" << std::endl;
+
+    // Check if the transformed point lies on the transformed plane
+    float distance = Dot(transformedPlane, transformedPoint);
+    std::cout << "Distance from transformed point to transformed plane: "
+        << distance << " (should be close to 0)\n";
+}
+
 int main()
 {
 	/*std::cout << "=== Testing Vector Operations ===" << std::endl;
@@ -390,6 +431,8 @@ int main()
 
     //TestIntersectTwoPlanes();
     //TestIntersectThreePlanes();
+
+    TestPlaneTransformation();
 
 	return 0;
 }
