@@ -117,3 +117,30 @@ bool IntersectTwoPlanes(const Plane& f1, const Plane& f2, Point3D *p, Vector3D *
 	return false;
 
 }
+
+
+/**
+ * Multiplies a plane by a transformation matrix to transform it from one coordinate system to another.
+ *
+ * @note IMPORTANT: This operator expects that the transformation matrix passed to it is already inverted.
+ * The correct usage is: transformedPlane = originalPlane * Inverse(transform)
+ *
+ * This is because planes transform in the opposite way compared to points:
+ * - A point transforms from coordinate system A to B using: pointB = transform * pointA
+ * - A plane transforms from coordinate system B to A using: planeA = planeB * inverse(transform)
+ *
+ * The mathematical reason is that planes are dual to points (they are covectors),
+ * and the transformation of dual entities requires the inverse-transpose of the matrix.
+ * Since our matrix already includes the transpose in its memory layout, we only need the inverse.
+ *
+ * @param f The plane to transform
+ * @param H The INVERSE of the transformation matrix to apply
+ * @return The transformed plane
+ */
+Plane operator *(const Plane& f, const Transform4D& H)
+{
+	return Plane(f.x * H(0, 0) + f.y * H(1, 0) + f.z * H(2, 0),
+		f.x * H(0, 1) + f.y * H(1, 1) + f.z * H(2, 1),
+		f.x * H(0, 2) + f.y * H(1, 2) + f.z * H(2, 2),
+		f.x * H(0, 3) + f.y * H(1, 3) + f.z * H(2, 3) + f.w);
+}
