@@ -1,5 +1,7 @@
 #pragma once
 #include "Vector3D.h"
+#include "Matrix3D.h"
+#include "Transform4D.h"
 
 struct Line 
 {	
@@ -11,3 +13,5 @@ struct Line
 	Line(Vector3D& v, Vector3D& m);
 
 };
+
+Line Transform(const Line& line, const Transform4D& H);
