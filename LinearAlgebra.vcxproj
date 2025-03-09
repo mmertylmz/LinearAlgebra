@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix3D.cpp" />
     <ClCompile Include="Matrix4D.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="Vector4D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Line.h" />
     <ClInclude Include="Matrix3D.h" />
     <ClInclude Include="Matrix4D.h" />
     <ClInclude Include="Plane.h" />

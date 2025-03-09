@@ -432,7 +432,7 @@ int main()
     //TestIntersectTwoPlanes();
     //TestIntersectThreePlanes();
 
-    TestPlaneTransformation();
+    //TestPlaneTransformation();
 
 	return 0;
 }
